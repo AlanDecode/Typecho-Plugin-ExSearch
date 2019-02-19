@@ -49,6 +49,8 @@ gulp.task('md5', function(){
 gulp.task('move', function(){
     gulp.src('./assets/iconfont*')
         .pipe(gulp.dest('./build/assets/'));
+    gulp.src('./cache/.gitignore')
+        .pipe(gulp.dest('./build/cache/'));
     return  gulp.src(['./LICENSE', './README.md'])
         .pipe(gulp.dest('./build/'));
 });
