@@ -1,0 +1,26 @@
+{
+  "name": "exsearch",
+  "version": "1.0.0",
+  "description": "Typecho Search Enhance",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "typecho",
+    "search"
+  ],
+  "author": "AlanDecode",
+  "license": "MIT",
+  "devDependencies": {
+    "del": "^3.0.0",
+    "eslint": "^5.14.1",
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-clean-css": "^4.0.0",
+    "gulp-rev": "^9.0.0",
+    "gulp-rev-collector": "^1.3.1",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.1"
+  }
+}
