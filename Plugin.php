@@ -121,6 +121,11 @@ class ExSearch_Plugin implements Typecho_Plugin_Interface
     public static function save()
     {
         $db = Typecho_Db::get();
+
+        // 防止过大的内容导致 MySQL 报错
+        $sql = 'SET GLOBAL max_allowed_packet=4294967295;';
+        $db->query($sql);
+
         // 获取搜索范围配置，query 对应内容
         $cache = array();
         $cache['posts'] = self::build('post');
