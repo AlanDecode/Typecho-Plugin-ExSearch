@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-redeclare */
+/* eslint-disable no-undef */
 // 插入内容块
 $('body').append('<div class="ins-search"><div class="ins-search-mask"></div><div class="ins-search-container"><div class="ins-input-wrapper"><input type="text" class="ins-search-input" placeholder="搜索点什么吧..." /><span class="ins-close ins-selectable"><i class="iconfont icon-close"></span></div><div class="ins-section-wrapper"><div class="ins-section-container"></div></div></div></div>');
 
@@ -63,28 +66,28 @@ var ModalHelper = {
         if (array.length === 0) return null;
         sectionTitle = CONFIG.TRANSLATION[type];
         switch (type) {
-            case 'POSTS':
-            case 'PAGES':
-                $searchItems = array.map(function (item) {
-                    var firstOccur = item.firstOccur > 20 ? item.firstOccur - 20 : 0;
-                    var preview = "";
-                    delete item.firstOccur;
-                    keywordArray.forEach(function(keyword){
-                        var regS = new RegExp(keyword, "gi");
-                        preview = item.text.replace(regS, "<em class=\"search-keyword\"> " + keyword + " </em>");
-                    });
-                    preview = preview ? preview.slice(firstOccur, firstOccur + 80) : item.text.slice(0, 80);
-                    return searchItem('file', item.title, null, preview, CONFIG.ROOT_URL + item.path);
+        case 'POSTS':
+        case 'PAGES':
+            $searchItems = array.map(function (item) {
+                var firstOccur = item.firstOccur > 20 ? item.firstOccur - 20 : 0;
+                var preview = '';
+                delete item.firstOccur;
+                keywordArray.forEach(function(keyword){
+                    var regS = new RegExp(keyword, 'gi');
+                    preview = item.text.replace(regS, '<em class="search-keyword"> ' + keyword + ' </em>');
                 });
-                break;
-            case 'CATEGORIES':
-            case 'TAGS':
-                $searchItems = array.map(function (item) {
-                    return searchItem(type === 'CATEGORIES' ? 'folder' : 'tag', item.name, item.slug, null, item.permalink);
-                });
-                break;
-            default:
-                return null;
+                preview = preview ? preview.slice(firstOccur, firstOccur + 80) : item.text.slice(0, 80);
+                return searchItem('file', item.title, null, preview, CONFIG.ROOT_URL + item.path);
+            });
+            break;
+        case 'CATEGORIES':
+        case 'TAGS':
+            $searchItems = array.map(function (item) {
+                return searchItem(type === 'CATEGORIES' ? 'folder' : 'tag', item.name, item.slug, null, item.permalink);
+            });
+            break;
+        default:
+            return null;
         }
         return section(sectionTitle).append($searchItems);
     }
@@ -128,7 +131,7 @@ var ModalHelper = {
                     return false;
                 var firstOccur = obj[field].toUpperCase().indexOf(keyword);
                 if (firstOccur > -1) {
-                    if (field == "text") obj["firstOccur"] = firstOccur;
+                    if (field == 'text') obj['firstOccur'] = firstOccur;
                     return true;
                 }
             });
@@ -266,23 +269,33 @@ var ModalHelper = {
         ModalHelper.beforeModal();
         $main.find('.ins-search-input').focus();
     }).on('click', '.ins-search-item', function () {
-        gotoLink($(this));
+        if(typeof(ExSearchCall) == 'function'){
+            ExSearchCall($(this));
+        }else{
+            gotoLink($(this));
+        }
     }).on('click', '.ins-close', function () {
         $main.removeClass('show');
         ModalHelper.closeModal();
     }).on('keydown', function (e) {
         if (!$main.hasClass('show')) return;
         switch (e.keyCode) {
-            case 27: // ESC
-                $main.removeClass('show');
-                ModalHelper.closeModal();
-                break;
-            case 38: // UP
-                selectItemByDiff(-1); break;
-            case 40: // DOWN
-                selectItemByDiff(1); break;
-            case 13: //ENTER
-                gotoLink($container.find('.ins-selectable.active').eq(0)); break;
+        case 27: // ESC
+            $main.removeClass('show');
+            ModalHelper.closeModal();
+            break;
+        case 38: // UP
+            selectItemByDiff(-1); break;
+        case 40: // DOWN
+            selectItemByDiff(1); break;
+        case 13: //ENTER
+            var item = $container.find('.ins-selectable.active').eq(0);
+            if(typeof(ExSearchCall) == 'function'){
+                ExSearchCall(item);
+            }else{
+                gotoLink(item);
+            }
+            break;
         }
     });
 

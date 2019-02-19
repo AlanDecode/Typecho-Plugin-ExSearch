@@ -11,6 +11,33 @@
 * 上传至插件目录，在后台启用
 * 保存一次插件设置，并点击重建索引。
 
+## 自定义 hook
+
+默认的，点击搜索结果时会直接跳转至对应的页面，但是若你的主题使用了 AJAX 或者 PJAX 技术，你可能需要使用自定义的钩子来处理点击事件（例如发起一次 PJAX 操作）。在页面中插入一个函数如下：
+
+```
+<script>
+function ExSearchCall(item){
+    // your code
+}
+</script>
+```
+
+其中，`item` 是一个 JQuery 对象。举例：
+
+```javascript
+function ExSearchCall(item){
+    if (item && item.length) {
+        $('.ins-close').click(); // 关闭搜索框
+        let url = item.attr('data-url'); // 获取目标页面 URL
+        $.pjax({url: url, 
+            container: '#pjax-container',
+            fragment: '#pjax-container',
+            timeout: 8000, }); // 发起一次 PJAX 请求
+    }
+}
+```
+
 ## Credit
 
 本项目灵感来源于 [Wikitten](https://github.com/zthxxx/hexo-theme-Wikitten) 与 [PPOffice](https://github.com/ppoffice)，感谢。
