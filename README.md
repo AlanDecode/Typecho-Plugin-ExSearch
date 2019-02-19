@@ -11,6 +11,8 @@
 * 上传至插件目录，在后台启用
 * 保存一次插件设置，并点击重建索引。
 
+在主题中，在任何可点击的元素上加上 `class="search-form-input"`，点击即可唤起搜索框。
+
 ## 自定义 hook
 
 默认的，点击搜索结果时会直接跳转至对应的页面，但是若你的主题使用了 AJAX 或者 PJAX 技术，你可能需要使用自定义的钩子来处理点击事件（例如发起一次 PJAX 操作）。在页面中插入一个函数如下：
@@ -43,6 +45,12 @@ function ExSearchCall(item){
 本项目灵感来源于 [Wikitten](https://github.com/zthxxx/hexo-theme-Wikitten) 与 [PPOffice](https://github.com/ppoffice)，感谢。
 
 This project is inspired by [Wikitten](https://github.com/zthxxx/hexo-theme-Wikitten) and [PPOffice](https://github.com/ppoffice), thanks.
+
+## 捐助
+
+如果这个项目有帮助到你，请考虑向我捐助：
+
+![](https://wx1.sinaimg.cn/large/0060lm7Tly1g0c4cbi71lj30sc0iv453.jpg)
 
 ## LICENSE
 
