@@ -2,7 +2,7 @@
 
 > 🔍 为 Typecho 带来实时搜索体验 [![build status](https://img.shields.io/travis/AlanDecode/Typecho-Plugin-ExSearch/source.svg?style=flat-square)](https://travis-ci.org/AlanDecode/Typecho-Plugin-ExSearch)
 
-![](https://raw.githubusercontent.com/AlanDecode/Typecho-Plugin-ExSearch/source/screenshot.png)
+![](https://wx2.sinaimg.cn/large/0060lm7Tly1g0c0wvk8s4j311b0n7qbr.jpg)
 
 ## 使用
 
