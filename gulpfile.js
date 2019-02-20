@@ -47,7 +47,7 @@ gulp.task('md5', function(){
 
 // 无需处理的文件
 gulp.task('move', function(){
-    gulp.src('./assets/iconfont*')
+    gulp.src(['./assets/iconfont*', './assets/jquery.min.js'])
         .pipe(gulp.dest('./build/assets/'));
     gulp.src('./cache/.gitignore')
         .pipe(gulp.dest('./build/cache/'));

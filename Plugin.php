@@ -107,6 +107,15 @@ class ExSearch_Plugin implements Typecho_Plugin_Interface
             '静态化可以节省数据库调用，降低服务器压力。<mark>若需启用，需要保证本插件目录中 cache 文件夹可写。</mark>'
         );
         $form->addInput($t);
+
+        $t = new Typecho_Widget_Helper_Form_Element_Select(
+            'jq',
+            array('true' => '是','false' => '否'),
+            'true',
+            '引入 JQuery',
+            '是否引入 JQuery。<mark>若你的主题已经引入了，请务必关闭此项。</mark>'
+        );
+        $form->addInput($t);
     }
 
     /**
@@ -293,6 +302,11 @@ ExSearchConfig = {
      */
     public static function footer()
     {
+        if(Helper::options()->plugin('ExSearch')->jq == 'true'){
+?>
+<script src="<?php Helper::options()->pluginUrl('ExSearch/assets/jquery.min.js'); ?>"></script>
+<?php           
+        }
 ?>
 <script src="<?php Helper::options()->pluginUrl('ExSearch/assets/ExSearch.js'); ?>"></script>
 <?php
