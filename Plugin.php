@@ -98,7 +98,7 @@ class ExSearch_Plugin implements Typecho_Plugin_Interface
             array('true' => '是','false' => '否'),
             'false',
             '静态化',
-            '静态化可以节省数据库调用，降低服务器压力。若需启用，需要保证本插件目录中 cache 文件夹可写。'
+            '静态化可以节省数据库调用，降低服务器压力。<mark>若需启用，需要保证本插件目录中 cache 文件夹可写。</mark>'
         );
         $form->addInput($t);
     }
@@ -134,14 +134,25 @@ class ExSearch_Plugin implements Typecho_Plugin_Interface
         $cache = json_encode($cache);
         $md5 = md5($cache);
 
-        $db->query($db->insert('table.exsearch')->rows(array(
-            'key' => $md5,
-            'data' => $cache
-        )));
-
         if(Helper::options()->plugin('ExSearch')->static == 'true')
         {
-            file_put_contents(__DIR__.'/cache/cache-'.$md5.'.json', $cache);
+            $code = file_put_contents(__DIR__.'/cache/cache-'.$md5.'.json', $cache);
+            if($code < 1)
+            {
+                throw new Typecho_Plugin_Exception('ExSearch 索引写入失败，请保证缓存目录可写', 1);
+                exit(1);
+            }
+            $db->query($db->insert('table.exsearch')->rows(array(
+                'key' => $md5,
+                'data' => ''
+            )));
+        }
+        else
+        {
+            $db->query($db->insert('table.exsearch')->rows(array(
+                'key' => $md5,
+                'data' => $cache
+            )));
         }
     }  
 
