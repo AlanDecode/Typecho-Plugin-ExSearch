@@ -40,6 +40,21 @@ function ExSearchCall(item){
 }
 ```
 
+## 可能的问题
+
+如果你的站点内容过多导致建立索引失败，请在 Plugin.php 第 140 行左右的位置，取消下面两行的注释：
+
+```php
+$sql = 'SET GLOBAL max_allowed_packet=4294967295;';
+$db->query($sql);
+```
+
+注意，这需要高级权限。你也可以手动对数据库执行：
+
+```bash
+mysql > SET GLOBAL max_allowed_packet=4294967295;
+```
+
 ## Credit
 
 本项目灵感来源于 [Wikitten](https://github.com/zthxxx/hexo-theme-Wikitten) 与 [PPOffice](https://github.com/ppoffice)，感谢。
