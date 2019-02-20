@@ -30,8 +30,14 @@ class ExSearch_Plugin implements Typecho_Plugin_Interface
         // 添加路由
         Helper::addRoute("route_ExSearch","/ExSearch","ExSearch_Action",'action');
 
-        // 创建表
         $db= Typecho_Db::get();
+        
+        $sql = 'select version();';
+        $row = $db->fetchRow($db->select('version();'));
+        $ver = $row['version()'];
+        $charset = $ver >= '5.5.3' ? 'utf8mb4' : 'utf8';
+
+        // 创建表
         $dbname =$db->getPrefix() . 'exsearch';
         $sql = "SHOW TABLES LIKE '%" . $dbname . "%'";
         if (count($db->fetchAll($sql)) == 0) {
@@ -42,7 +48,7 @@ class ExSearch_Plugin implements Typecho_Plugin_Interface
                 `key` char(32) not null,
                 `data` longtext,
                 primary key (`id`)
-            ) default charset=utf8mb4';
+            ) default charset='.$charset;
  
             $sqls = explode(';', $sql);
             foreach ($sqls as $sql) {
