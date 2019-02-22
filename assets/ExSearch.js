@@ -6,7 +6,7 @@
 console.log(' %c ExSearch %c https://blog.imalan.cn/archives/261/ ', 'color: #fadfa3; background: #23b7e5; padding:5px;', 'background: #1c2b36; padding:5px;');
 
 // 插入内容块
-$('body').append('<div class="ins-search"><div class="ins-search-mask"></div><div class="ins-search-container"><div class="ins-input-wrapper"><input type="text" class="ins-search-input" placeholder="搜索点什么吧..." /><span class="ins-close ins-selectable"><i class="iconfont icon-close"></span></div><div class="ins-section-wrapper"><div class="ins-section-container"></div></div></div></div>');
+$('body').append('<div class="ins-search"><div class="ins-search-container"><div class="ins-input-wrapper"><input type="text" class="ins-search-input" placeholder="搜索点什么吧..." /><span class="ins-close ins-selectable"><i class="iconfont icon-close"></span></div><div class="ins-section-wrapper"><div class="ins-section-container"></div></div></div></div>');
 
 // Config
 (function (window) {
@@ -78,7 +78,7 @@ var ModalHelper = {
                 delete item.firstOccur;
                 keywordArray.forEach(function(keyword){
                     var regS = new RegExp(keyword, 'gi');
-                    preview = item.text.replace(regS, '<em class="search-keyword"> ' + keyword + ' </em>');
+                    preview = item.text.replace(regS, '<mark class="search-keyword"> ' + keyword + ' </mark>');
                 });
                 preview = preview ? preview.slice(firstOccur, firstOccur + 80) : item.text.slice(0, 80);
                 return searchItem('file', item.title, null, preview, CONFIG.ROOT_URL + item.path);
