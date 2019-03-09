@@ -20,12 +20,6 @@ class ExSearch_Action extends Widget_Abstract_Contents implements Widget_Interfa
     public function action(){
         switch ($_GET['action']) {
             case 'rebuild':
-                $db = Typecho_Db::get();
-                $dbname =$db->getPrefix() . 'exsearch';
-                $sql = "SHOW TABLES LIKE '%" . $dbname . "%'";
-                if(count($db->fetchAll($sql)) != 0){
-                    $db->query($db->delete('table.exsearch')->where('id >= ?', 0));
-                }
                 ExSearch_Plugin::save();
 ?>
                 重建索引完成，<a href="<?php Helper::options()->siteUrl(); ?>" target="_self">回到首页</a>。

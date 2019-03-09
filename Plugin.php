@@ -96,7 +96,7 @@ class ExSearch_Plugin implements Typecho_Plugin_Interface
     <h3>使用方式</h3>
     &lt;button class=&quot;search-form-input&quot;&gt;搜索&lt;/button&gt;
 </p>
-<p>启用插件后请保存一次设置。保存插件设置后请<a href="<?php Helper::options()->index('/ExSearch?action=rebuild'); ?>" target="_blank">重建索引</a>。重建索引会清除所有数据库缓存，静态化缓存不会被清除。</p>
+<p>启用插件后请保存一次设置。保存插件设置后请<a href="<?php Helper::options()->index('/ExSearch?action=rebuild'); ?>" target="_blank">重建索引</a>。重建索引会清除所有缓存数据。</p>
 <?php
         // JSON 静态化
         $t = new Typecho_Widget_Helper_Form_Element_Radio(
@@ -137,9 +137,12 @@ class ExSearch_Plugin implements Typecho_Plugin_Interface
     {
         $db = Typecho_Db::get();
 
-        // 防止过大的内容导致 MySQL 报错
+        // 防止过大的内容导致 MySQL 报错，需要高级权限
         // $sql = 'SET GLOBAL max_allowed_packet=4294967295;';
         // $db->query($sql);
+
+        // 删除原本的记录
+        self::clean();
 
         // 获取搜索范围配置，query 对应内容
         $cache = array();
@@ -169,7 +172,28 @@ class ExSearch_Plugin implements Typecho_Plugin_Interface
                 'data' => $cache
             )));
         }
-    }  
+    }
+
+    /**
+     * 删除缓存（数据库与静态缓存）
+     * 
+     * @access private
+     * @return bool
+     */
+    private static function clean()
+    {
+        $db = Typecho_Db::get();
+        $dbname = $db->getPrefix() . 'exsearch';
+        $sql = "SHOW TABLES LIKE '%" . $dbname . "%'";
+        if(count($db->fetchAll($sql)) != 0){
+            $db->query($db->delete('table.exsearch')->where('id >= ?', 0));
+        }
+
+        // 删除静态缓存
+        foreach (glob(__DIR__.'/cache/*.json') as $file) {
+            unlink($file);
+        }
+    }
 
     /**
      * 生成对象
