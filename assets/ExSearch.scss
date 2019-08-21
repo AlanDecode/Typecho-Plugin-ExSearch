@@ -71,14 +71,16 @@ $ins-background-blue: #006BDE;
 
 .ins-close{
     top: 50%;
+    transform: translateY(-50%);
     right: 6px;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     font-size: 16px;
-    margin-top: -11px;
     position: absolute;
     text-align: center;
-    display: inline-block;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     &:hover{
         color: $ins-background-blue
     }
@@ -98,6 +100,7 @@ $ins-background-blue: #006BDE;
         margin: 0;
         width: 100%;
         height: 100%;
+        max-height: 100vh;
         background: $ins-background-grey
     }
 }

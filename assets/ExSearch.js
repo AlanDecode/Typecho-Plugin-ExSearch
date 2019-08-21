@@ -271,6 +271,7 @@ var ModalHelper = {
     $(document).on('click focus', '.search-form-input', function () {
         $main.addClass('show');
         ModalHelper.beforeModal();
+        document.scrollingElement.scrollTop = 0;
         $main.find('.ins-search-input').focus();
     }).on('click', '.ins-search-item', function () {
         if(typeof(ExSearchCall) == 'function'){
