@@ -31,11 +31,6 @@ class ExSearch_Plugin implements Typecho_Plugin_Interface
         Helper::addRoute("route_ExSearch","/ExSearch","ExSearch_Action",'action');
 
         $db= Typecho_Db::get();
-        
-        $sql = 'select version();';
-        $row = $db->fetchRow($db->select('version();'));
-        $ver = $row['version()'];
-        $charset = $ver >= '5.5.3' ? 'utf8mb4' : 'utf8';
 
         // 创建表
         $dbname =$db->getPrefix() . 'exsearch';
@@ -48,7 +43,7 @@ class ExSearch_Plugin implements Typecho_Plugin_Interface
                 `key` char(32) not null,
                 `data` longtext,
                 primary key (`id`)
-            ) default charset='.$charset;
+            ) default charset=utf8';
  
             $sqls = explode(';', $sql);
             foreach ($sqls as $sql) {

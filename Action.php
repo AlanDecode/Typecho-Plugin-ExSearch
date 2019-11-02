@@ -18,6 +18,13 @@ class ExSearch_Action extends Widget_Abstract_Contents implements Widget_Interfa
      * @access public
      */
     public function action(){
+        // 要求先登录
+        Typecho_Widget::widget('Widget_User')->to($user);
+        if (!$user->have() || !$user->hasLogin()) {
+            echo 'Invalid Request';
+            exit;
+        }
+
         switch ($_GET['action']) {
             case 'rebuild':
                 ExSearch_Plugin::save();
