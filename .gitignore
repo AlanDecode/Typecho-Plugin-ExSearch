@@ -2,3 +2,4 @@ node_modules/*
 temp/*
 build/*
 assets/ExSearch.css
+assets/ExSearch.css.map

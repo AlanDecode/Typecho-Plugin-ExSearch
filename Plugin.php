@@ -202,7 +202,8 @@ class ExSearch_Plugin implements Typecho_Plugin_Interface
         $rows = $db->fetchAll($db->select()->from('table.contents')
                 ->where('table.contents.type = ?', $type)
                 ->where('table.contents.status = ?', 'publish')
-                ->where('table.contents.password IS NULL'));
+                ->where('table.contents.password IS NULL')
+                ->order('table.contents.created', Typecho_Db::SORT_DESC));
         $cache = array();
         foreach ($rows as $row) {
             $widget = self::widget('Contents', $row['cid']);
