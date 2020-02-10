@@ -6,7 +6,7 @@
 console.log(' %c ExSearch %c https://blog.imalan.cn/archives/261/ ', 'color: #fadfa3; background: #23b7e5; padding:5px;', 'background: #1c2b36; padding:5px;');
 
 // 插入内容块
-$('body').append('<div class="ins-search"><div class="ins-search-container"><div class="ins-input-wrapper"><input type="text" class="ins-search-input" placeholder="搜索点什么吧..." /><span class="ins-close ins-selectable"><i class="iconfont icon-close"></span></div><div class="ins-section-wrapper"><div class="ins-section-container"></div></div></div></div>');
+$('body').append('<div class="ins-search"><div class="ins-search-overlay"></div><div class="ins-search-container"><div class="ins-input-wrapper"><input type="text" class="ins-search-input" placeholder="搜索点什么吧..." /><span class="ins-close ins-selectable"><i class="iconfont icon-close"></span></div><div class="ins-section-wrapper"><div class="ins-section-container"></div></div></div></div>');
 
 // Config
 (function (window) {
@@ -279,7 +279,7 @@ var ModalHelper = {
         }else{
             gotoLink($(this));
         }
-    }).on('click', '.ins-close', function () {
+    }).on('click', '.ins-close,.ins-search-overlay', function () {
         $main.removeClass('show');
         ModalHelper.closeModal();
     }).on('keydown', function (e) {

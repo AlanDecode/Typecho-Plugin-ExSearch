@@ -28,8 +28,7 @@ $ins-background-blue: #006BDE;
             animation: exsearch-fade-in 0.3s;
             animation-fill-mode: forwards;
         }
-        &::before{
-            content: "";
+        .ins-search-overlay{
             position: fixed;
             top: 0;
             left: 0;
