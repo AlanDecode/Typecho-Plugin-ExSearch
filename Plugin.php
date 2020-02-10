@@ -291,7 +291,7 @@ class ExSearch_Plugin implements Typecho_Plugin_Interface
     {
         $setting = Helper::options()->plugin('ExSearch');
 ?>
-<link rel="stylesheet" href="<?php Helper::options()->pluginUrl('ExSearch/assets/ExSearch-182e5a8868.css'); ?>">
+<link rel="stylesheet" href="<?php Helper::options()->pluginUrl('ExSearch/assets/ExSearch-391ac63801.css'); ?>">
 <!--插件配置-->
 <script>
 ExSearchConfig = {
@@ -328,7 +328,7 @@ ExSearchConfig = {
 <?php           
         }
 ?>
-<script src="<?php Helper::options()->pluginUrl('ExSearch/assets/ExSearch-493cb9cd88.js'); ?>"></script>
+<script src="<?php Helper::options()->pluginUrl('ExSearch/assets/ExSearch-6e577ac4e0.js'); ?>"></script>
 <?php
     }
 }
