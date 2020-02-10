@@ -1,17 +1,4 @@
 {
-  "name": "exsearch",
-  "version": "1.0.0",
-  "description": "Typecho Search Enhance",
-  "main": "gulpfile.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "typecho",
-    "search"
-  ],
-  "author": "AlanDecode",
-  "license": "MIT",
   "devDependencies": {
     "del": "^3.0.0",
     "eslint": "^5.14.1",
