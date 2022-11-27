@@ -11,7 +11,7 @@
  * @version 0.1
  * @link https://www.imalan.cn
  */
-
+use Typecho\Widget;// 兼容1.2开发版
 class ExSearch_Plugin implements Typecho_Plugin_Interface
 {
     /**
@@ -270,11 +270,12 @@ class ExSearch_Plugin implements Typecho_Plugin_Interface
             'Metas'     =>  'mid',
             'Users'     =>  'uid'
         );
-        $className = "Widget_Abstract_{$table}";
+        // $className = "Widget_Abstract_{$table}"; 
+        $className = "Widget_Abstract_".$table; // 兼容1.2开发版
         $key = $keys[$table];
         $db = Typecho_Db::get();
-        $widget = new $className(Typecho_Request::getInstance(), Typecho_Widget_Helper_Empty::getInstance());
-        
+        // $widget = new $className(Typecho_Request::getInstance(), Typecho_Widget_Helper_Empty::getInstance());
+        $widget =  Widget::widget($className);// 兼容1.2开发版
         $db->fetchRow(
             $widget->select()->where("{$key} = ?", $pkId)->limit(1),
                 array($widget, 'push'));
